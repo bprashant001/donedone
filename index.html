@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Momentum App</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&text=0123456789:&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="home-view" class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <h1>MOMENTUM</h1>
+                <div class="logo-icon">▲</div> 
+            </div>
+        </header>
+        <main class="home-content">
+            <button id="start-focus-btn" class="primary-btn">Start Focus Window</button>
+            
+            <form id="setup-form" class="setup-form hidden" onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <label>Focus Window (hrs)</label>
+                    <input type="number" id="setup-total-hrs" class="minimal-input" min="1" max="12" placeholder="e.g., 4" required>
+                </div>
+                <div class="input-group">
+                    <label>Work Session (mins)</label>
+                    <input type="number" id="setup-work-mins" class="minimal-input" min="5" max="120" placeholder="e.g., 50" required>
+                </div>
+                <div class="input-group">
+                    <label>Break Time (mins)</label>
+                    <input type="number" id="setup-break-mins" class="minimal-input" min="1" max="60" placeholder="e.g., 10" required>
+                </div>
+                <button type="submit" id="begin-focus-btn" class="primary-btn" disabled>Begin Focus</button>
+            </form>
+
+            <button id="home-theme-toggle" class="secondary-btn theme-toggle">SWITCH TO DARK MODE</button>
+            <button id="support-btn" class="text-link support-link">☕ Buy me a coffee</button>
+        </main>
+    </div>
+
+    <div id="active-view" class="app-container hidden">
+        <header class="app-header">
+            <div class="logo-container">
+                <h1>MOMENTUM</h1>
+                <button class="theme-icon theme-toggle">🌓</button>
+            </div>
+            <button id="end-work-btn" class="text-link">End Work Window</button>
+        </header>
+
+        <main class="active-session">
+            <section class="timer-section">
+                <h2 id="timer-label">WORK SESSION</h2>
+                <div id="timer-display" class="massive-timer">00:00</div>
+                
+                <button id="fullscreen-btn" class="fullscreen-btn"></button>
+
+                <div id="read-only-task-container" class="task-container hidden" style="margin-bottom: 1.5rem;">
+                    <h2>SESSION TARGETS</h2>
+                    <div id="read-only-task-list" class="task-list"></div>
+                </div>
+
+                <button class="primary-btn hidden" id="start-session-btn">START SESSION</button>
+                <button class="secondary-btn hidden" id="timer-action-btn">PAUSE</button>
+            </section>
+
+            <section class="target-builder-section hidden" id="target-builder-section">
+                <div class="task-container">
+                    <h2 id="target-header">TARGETS FOR SESSION 1</h2>
+                    <div class="task-input-container">
+                        <input type="text" id="new-task-input" class="minimal-input" placeholder="Add target and press Enter..." autocomplete="off">
+                    </div>
+                    <div id="interactive-task-list" class="task-list"></div>
+                    <button class="primary-btn" id="finish-targets-btn" style="margin-top: 1.5rem;">DONE</button>
+                </div>
+            </section>
+
+            <section class="reflection-section">
+                
+                <div id="reflection-form-container" class="hidden invisible disabled">
+                    <h2 id="reflection-header" style="text-align: center;">SESSION 1 REFLECTION</h2>
+                    
+                    <form class="reflection-form" id="reflection-form">
+                 
+                        <button type="button" id="log-achievements-btn" class="secondary-btn">LOG ACHIEVEMENTS</button>
+                        <div id="achievement-checklist-container" class="task-container hidden">
+                            <div id="achievement-list" class="task-list"></div>
+                            <button type="button" id="save-achievements-btn" class="primary-btn" style="margin-top: 1rem;">DONE</button>
+                        </div>
+                        <div id="achievement-result-text" class="result-text hidden"></div>
+
+                        <input type="text" id="things-to-improve" placeholder="Things to Improve" class="minimal-input" required>
+
+                        <button type="button" id="plan-next-targets-btn" class="secondary-btn">PLAN NEXT TARGETS</button>
+                        <div id="next-target-builder-container" class="task-container hidden">
+                            <div class="task-input-container">
+                                <input type="text" id="next-task-input" class="minimal-input" placeholder="Add target and press Enter..." autocomplete="off">
+                            </div>
+                            <div id="next-task-list" class="task-list"></div>
+                            <button type="button" id="save-next-targets-btn" class="primary-btn" style="margin-top: 1rem;">DONE</button>
+                        </div>
+                        <div id="next-targets-result-text" class="result-text hidden"></div>
+
+                        <button type="submit" id="initialize-next-btn" class="primary-btn" disabled>INITIALIZE NEXT</button>
+                    </form>
+                </div>
+
+                <div class="journal-list" id="journal-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="exit-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Are you sure you want to end the focus window?</h3>
+            <div class="modal-actions">
+                <button id="modal-no-btn" class="secondary-btn">No</button>
+                <button id="modal-yes-btn" class="primary-btn">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
